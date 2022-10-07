@@ -4,8 +4,68 @@ body {
 	text-align: center; */
 }
 
+.App {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+}
+
 .nota {
-	background-color: rgb(216, 202, 202);
-	max-width: 400px;
+	gap: 5px;
+	padding: 15px;
+	max-width: 600px;
+	min-width: 200px;
 	margin: 0 auto;
 }
+
+.button-wrapper {
+	display: flex;
+	gap: 5px;
+	justify-content: space-evenly;
+}
+
+.new-card-button {
+	min-width: 80px;
+}
+
+.addButton {
+	margin-top: 25px;
+}
+
+.deleteButtonWrapper {
+	/* display: flex;
+	justify-content: center;
+	align-items: center; */
+}
+
+.deleteButton {
+	/* min-width: auto; */
+
+	position: relative;
+	float: right;
+	margin-right: 0;
+	border: none;
+	width: 15px;
+	height: 15px;
+	font-size: 10px;
+	cursor: pointer;
+	outline: none;
+	padding: 0;
+
+
+}
+
+.deleteButton p {
+	/* display: block;
+	padding-top: 22px;
+	text-align: center;
+	line-height: 1em; */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/* padding-bottom: 5px; */
+}
+
+.note button {}

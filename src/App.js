@@ -1,42 +1,75 @@
+import { useEffect, useState } from 'react';
+import NewCard from './component/NewCard';
 import './App.css';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import PostItCard from './component/PostItCard';
+import Button from 'react-bootstrap/Button';
 
 const App = () => {
 
-	const[response, setResponse] = useState("");
+	const[modoInsercao, setModoInsercao] = useState(false);
+
+	const[response, setResponse] = useState([]);
 
 	useEffect(() => {
 		getData();
 	}, [])
-	
 
 	const getData = async () => {
-		const response =  await axios.get('https://random-data-api.com/api/v2/blood_types', 
-			{ 
-				params: { 
-					"response_type": "json" ,
-					"size": 3
-				} 
-			});
-
+		const response =  await axios.get('/canvas', {
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
 		setResponse(response.data)
+	}
+
+	const deleteCanal = async (id) => {
+		await axios.delete(`/canvas/${id}`, {
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+
+		getData();
+	} 
+
+	const cancelaNota = () => {
+		setModoInsercao(!modoInsercao);
+	}
+
+	const salvaNota = async(nota) => {
+		console.log("solicitou criacao de nota " , nota)
+		await axios({
+			method: 'post',
+			url: '/canvas',
+			data: nota,
+			headers:{
+					 'Content-Type' : 'application/json'
+			}
+		})
+		getData()
 	}
 
   return (
     <div className="App">
-			{response.map(blood => {
+			
+			<div className='addButton'>
+				<Button variant="primary" onClick={() => {
+					setModoInsercao(!modoInsercao)
+				}}>
+					adicionar nota
+				</Button>
+			</div>
+
+			{modoInsercao ? <NewCard salvaNota={salvaNota} cancelaNota={cancelaNota} /> : null}
+		 	
+
+			{response.map(canal => {
 				return(
-					<div className='nota'>
-						<h1> id: {blood.id}</h1>
-						<h3> texto: {blood.group} </h3>
-					</div>
+					<PostItCard canal={canal} deleteCanal={deleteCanal}/>
 				)
 			})}
-
-			<div className='nota'>
-				
-			</div>
     </div>
   );
 }
