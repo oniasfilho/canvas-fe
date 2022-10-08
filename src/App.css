@@ -18,6 +18,9 @@ body {
 	max-width: 600px;
 	min-width: 200px;
 	margin: 0 auto;
+	background-color: ghostwhite;
+	border: 1px solid;
+	border-radius: 10px;
 }
 
 .button-wrapper {
@@ -67,5 +70,10 @@ body {
 	justify-content: center;
 	/* padding-bottom: 5px; */
 }
+
+li {
+	list-style: none;
+}
+
 
 .note button {}
